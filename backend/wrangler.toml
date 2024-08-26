@@ -1,6 +1,7 @@
 #:schema node_modules/wrangler/config-schema.json
 name = "harris-hat-api"
 main = "src/index.ts"
+compatibility_date = "2024-08-25"
 
 triggers.crons = ["*/10 * * * *"]
 
@@ -25,3 +26,6 @@ name = "VERIFY_RATELIMIT"
 type = "ratelimit"
 namespace_id = "24110502"
 simple = { limit = 3, period = 60 }
+
+[vars]
+AWS_REGION = "us-east-2"

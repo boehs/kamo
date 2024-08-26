@@ -26,6 +26,9 @@ export const sendEmail = async (
     DefaultContent: {
       Template: {
         TemplateName: template,
+        TemplateData: JSON.stringify({
+          uuid: "0",
+        }),
       },
     },
     BulkEmailEntries: to.map((t) => ({
@@ -51,5 +54,7 @@ export const sendEmail = async (
       ],
     })),
   };
+  console.log(command);
   let res = await client.fetch(ENDPOINT, { body: JSON.stringify(command) });
+  console.log(await res.text());
 };

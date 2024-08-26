@@ -47,28 +47,23 @@ const form = document.querySelector("form");
 form?.addEventListener("submit", (e) => {
   e.preventDefault();
   const data = new FormData(form);
-  document.querySelector("form > p").style.setProperty("display", "block");
-  document.querySelector("button").style.setProperty("display", "none");
-  requestAnimationFrame(() => {
-    form.classList.add("submitted");
-    document.querySelector("form > p").style.setProperty("flex", "9999");
-    document
-      .querySelectorAll("body > span")
-      .forEach((r) => r.style.setProperty("top", "-100px"));
-
-    hat.style.setProperty("margin-top", "0");
-  });
   fetch("/api/subscribe", {
     method: "POST",
     body: data,
   })
-    .then((res) => {
-      if (res.ok) {
-        alert("Subscribed!");
-        form.reset();
-      } else {
-        alert("Error subscribing");
-      }
+    .then(async (res) => {
+      document.querySelector("form > p").style.setProperty("display", "block");
+      document.querySelector("button").style.setProperty("display", "none");
+      requestAnimationFrame(() => {
+        form.classList.add("submitted");
+        document.querySelector("form > p").style.setProperty("flex", "9999");
+        document
+          .querySelectorAll("body > span")
+          .forEach((r) => r.style.setProperty("top", "-100px"));
+
+        hat.style.setProperty("margin-top", "0");
+      });
+      document.querySelector("form > p").innerText = await res.text();
     })
     .catch((e) => {
       console.error(e);

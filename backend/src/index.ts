@@ -18,13 +18,13 @@ import { verify } from "./verify";
 
 export default {
   async fetch(request, env, ctx): Promise<Response> {
-    if (new URL(request.url).pathname.startsWith("/subscribe/")) {
+    if (new URL(request.url).pathname.startsWith("/api/subscribe")) {
       return subscribe(request, env);
     }
-    if (new URL(request.url).pathname.startsWith("/verify/")) {
+    if (new URL(request.url).pathname.startsWith("/api/verify/")) {
       return verify(request, env);
     }
-    if (new URL(request.url).pathname.startsWith("/unsubscribe/")) {
+    if (new URL(request.url).pathname.startsWith("/api/unsubscribe/")) {
       return unsubscribe(request, env);
     }
     return new Response("Not Found", { status: 404 });
