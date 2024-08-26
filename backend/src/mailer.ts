@@ -1,6 +1,6 @@
 import { AwsClient } from "aws4fetch";
 const ENDPOINT =
-  "https://email.us-east-2.amazonaws.com/v2/email/outbound-bulk-emails";
+  "https://email.us-east-2.amazonaws.com/v2/email/outbound-emails";
 export const createClient = (env: {
   AWS_REGION: string;
   MAIL_KEY_ID: string;
@@ -27,12 +27,13 @@ export const sendEmail = async (
       Template: {
         TemplateName: template,
         TemplateData: JSON.stringify({
-          uuid: "0",
+          uuid: to[0].uuid,
         }),
         Headers: [
           {
             Name: "List-Unsubscribe",
-            Value: "<https://kamalacamo.org/api/unsubscribe/" + t.uuid + ">",
+            Value:
+              "<https://kamalacamo.org/api/unsubscribe/" + to[0].uuid + ">",
           },
           {
             Name: "List-Unsubscribe-Post",
