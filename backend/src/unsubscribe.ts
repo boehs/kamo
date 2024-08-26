@@ -1,5 +1,5 @@
 export async function unsubscribe(request: Request, env: Env) {
-  const uuid = request.url.split("/")[3];
+  const uuid = new URL(request.url).pathname.split("/")[3];
   const subscriber = await env.SUBSCRIBERS.prepare(
     "UPDATE subscribers SET verified = -1 WHERE verificationKey = ?"
   )
