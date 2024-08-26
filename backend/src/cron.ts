@@ -17,7 +17,7 @@ export async function cron(env: Env) {
     // chunk into groups of 14
     const chunks = [];
     while (subscribers.results.length) {
-      chunks.push(subscribers.results.splice(0, 14));
+      chunks.push(subscribers.results.splice(0, 1));
     }
     for (const chunk of chunks) {
       // send emails
@@ -29,7 +29,7 @@ export async function cron(env: Env) {
         "KamalaCamoNotify",
         env
       );
-      await new Promise((resolve) => setTimeout(resolve, 1200));
+      await new Promise((resolve) => setTimeout(resolve, 50));
     }
   } else if (!inStock && status !== "false") {
     await env.STATUS.put("inStock", "false");

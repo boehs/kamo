@@ -23,36 +23,27 @@ export const sendEmail = async (
   const client = createClient(env);
   const command = {
     FromEmailAddress: '"Kamala Camo Notifications" <mailer@kamalacamo.org>',
-    DefaultContent: {
+    Content: {
       Template: {
         TemplateName: template,
         TemplateData: JSON.stringify({
           uuid: "0",
         }),
+        Headers: [
+          {
+            Name: "List-Unsubscribe",
+            Value: "<https://kamalacamo.org/api/unsubscribe/" + t.uuid + ">",
+          },
+          {
+            Name: "List-Unsubscribe-Post",
+            Value: "List-Unsubscribe=One-Click",
+          },
+        ],
       },
     },
-    BulkEmailEntries: to.map((t) => ({
-      Destination: {
-        ToAddresses: [t.email],
-      },
-      ReplacementEmailContent: {
-        RepacementTemplate: {
-          ReplacementTemplateData: JSON.stringify({
-            uuid: t.uuid,
-          }),
-        },
-      },
-      ReplacementHeaders: [
-        {
-          Name: "List-Unsubscribe",
-          Value: "<https://kamalacamo.org/api/unsubscribe/" + t.uuid + ">",
-        },
-        {
-          Name: "List-Unsubscribe-Post",
-          Value: "List-Unsubscribe=One-Click",
-        },
-      ],
-    })),
+    Destination: {
+      ToAddresses: [to[0].email],
+    },
   };
   console.log(command);
   let res = await client.fetch(ENDPOINT, { body: JSON.stringify(command) });
