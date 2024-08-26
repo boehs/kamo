@@ -1,0 +1,222 @@
+html {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --rot: 0deg;
+}
+
+body {
+  width: 100%;
+  background: #52562d;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 20px;
+  font-family: "New Amsterdam", sans-serif;
+  color: wheat;
+}
+
+img {
+  animation: gelatine 1s infinite;
+  width: 350px;
+  transform: rotateY(var(--rot));
+  margin-top: 100px;
+  filter: drop-shadow(0 0 0.75rem rgba(47, 59, 43, 0.5));
+  transition: margin-top 0.5s;
+}
+@keyframes gelatine {
+  0% {
+    transform: translateY(0) rotateY(var(--rot));
+  }
+
+  40% {
+    transform: translateY(-150px) scale(0.95, 1.1) rotateY(var(--rot));
+  }
+
+  100% {
+    transform: translateY(0px) rotateY(var(--rot));
+  }
+}
+
+main {
+  max-width: 600px;
+  margin-top: 75px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+form {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+
+form > p,
+button[type="submit"] {
+  flex: 1;
+  background: #fbb02d;
+  border: 0;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 30px;
+  color: black;
+  text-align: center;
+}
+
+a {
+  color: #fbb02d;
+  text-decoration: none;
+}
+
+input,
+form > button {
+  outline: none;
+  flex: 2;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 5px solid #fbb02d;
+  background: transparent;
+  font-size: 30px;
+  font-family: "New Amsterdam", sans-serif;
+}
+
+input[type="email"] {
+  color: wheat;
+  transition: color 0.3s;
+}
+
+form > p,
+form > input,
+form > button {
+  transition: all 2s;
+}
+
+form > p {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+form.submitted > input {
+  padding: 0;
+  border: 0;
+}
+
+input.valid {
+  color: #a9bf67;
+}
+
+::placeholder {
+  color: rgba(245, 222, 179, 0.705);
+  opacity: 1; /* Firefox */
+}
+
+.imgWrap {
+  animation: scaleDown 1s;
+}
+
+@keyframes scaleDown {
+  0% {
+    transform: scale(1.5);
+  }
+  30% {
+    transform: scale(0.8);
+  }
+  60% {
+    transform: scale(1.2) translateY(100px);
+  }
+  80% {
+  }
+}
+
+p {
+  margin-block: 10px;
+}
+
+body > span {
+  padding: 5px;
+  position: absolute;
+  font-size: 30px;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  box-shadow: rgba(47, 59, 43, 0.2) 0px 2px 8px 0px;
+  transition: top 0.5s;
+}
+
+body.outOfStock > span {
+  background-color: #fb6107;
+}
+
+.inStock > span,
+.inStock .buy {
+  background-color: #86c700;
+  /** brat
+  im so kamala
+  */
+  font-family: "Arial Narrow", "Arial", sans-serif;
+  color: black;
+  filter: blur(0.5px);
+}
+
+.inStock .buy {
+  font-size: 100px;
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+.inStock form {
+  display: none;
+}
+
+.outOfStock .buy {
+  display: none;
+}
+
+.wrapper {
+  animation: scroll 15s linear infinite;
+  display: flex;
+  gap: 30px;
+}
+.wrapper > :first-child {
+  padding-left: 15px;
+}
+.wrapper > :last-child {
+  padding-right: 15px;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+span.right {
+  width: 1100px;
+  transform-origin: center right;
+  transform: rotate(15deg);
+  right: -20px;
+  top: 230px;
+}
+
+span.left {
+  width: 1100px;
+  transform-origin: center left;
+  transform: rotate(-15deg);
+  left: -20px;
+  top: 230px;
+}

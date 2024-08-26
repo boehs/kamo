@@ -1,0 +1,27 @@
+#:schema node_modules/wrangler/config-schema.json
+name = "harris-hat-api"
+main = "src/index.ts"
+
+triggers.crons = ["*/10 * * * *"]
+
+# every 10 minutes
+[[kv_namespaces]]
+binding = "STATUS"
+id = "71a41ba2370a4fa88a32bfcee22ed675"
+
+[[d1_databases]]
+binding = "SUBSCRIBERS"
+database_name = "harris-hat-subscribers"
+database_id = "9cb8f09d-662a-4327-a3a7-c8b7adbbcf91"
+
+[[unsafe.bindings]]
+name = "SIGNUP_RATELIMIT"
+type = "ratelimit"
+namespace_id = "24110501"
+simple = { limit = 1, period = 60 }
+
+[[unsafe.bindings]]
+name = "VERIFY_RATELIMIT"
+type = "ratelimit"
+namespace_id = "24110502"
+simple = { limit = 3, period = 60 }

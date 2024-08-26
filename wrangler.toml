@@ -1,0 +1,6 @@
+pages_build_output_dir = "./src"
+name = "harris-hat"
+
+[[kv_namespaces]]
+binding = "STATUS"
+id = "71a41ba2370a4fa88a32bfcee22ed675"
