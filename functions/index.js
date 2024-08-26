@@ -1,7 +1,7 @@
 export async function onRequest(context) {
   const { request, env } = context;
   const response = await env.ASSETS.fetch(request);
-  const inStock = env.STATUS.get("inStock");
+  const inStock = await env.STATUS.get("inStock");
   return new HTMLRewriter()
     .on(".wrapper > span", {
       element(element) {
