@@ -2,6 +2,7 @@ import { sendEmail } from "./mailer";
 import { em, verifyTemplate } from "./templates";
 
 export async function subscribe(request: Request, env: Env) {
+  return new Response("Disabled due to spam", { status: 200 });
   // get email from body
   const json = await request.formData();
   const email = json.get("email");
